@@ -10,14 +10,14 @@ This project evaluates how transpiler optimization levels and routing strategies
 
 In the NISQ (Noisy Intermediate-Scale Quantum) era, compilation choices can significantly affect circuit performance under noise. Even small differences in:
 
-- circuit depth  
-- number of CX gates  
-- number of inserted SWAP operations  
-- routing strategy  
+- circuit depth
+- number of CX gates
+- number of inserted SWAP operations
+- routing strategy
 
 can influence the final fidelity of entangled states.
 
-This benchmark provides a controlled environment to analyze how compiler-level decisions impact Bell-state fidelity under depolarizing, thermal relaxation, and readout noise models.
+This benchmark provides a controlled environment to analyze how compiler-level decisions impact Bell-state fidelity under depolarizing, thermal relaxation, and optional readout noise.
 
 ---
 
@@ -48,26 +48,26 @@ $$
 where the signs $s_{ZZ}$, $s_{XX}$, and $s_{YY}$ depend on the chosen Bell state.
 
 4. Transpile circuits using:
-   - multiple optimization levels  
-   - different routing strategies  
+   - multiple optimization levels
+   - different routing strategies
 
-5. Sweep depolarizing noise levels by varying $p_{1q}$ and setting
+5. Sweep depolarizing noise levels by varying $p_{1q}$ and setting:
 
 $$
-p_{2q} = 1.5\, p_{1q}
+p_{2q} = 1.5 \, p_{1q}
 $$
 
 6. Execute simulations using Qiskit Aer with:
-   - depolarizing noise  
-   - thermal relaxation noise  
-   - optional readout error  
+   - depolarizing noise
+   - thermal relaxation noise
+   - optional readout error
 
 7. Record:
-   - Bell fidelity $F$  
-   - statistical error  
-   - mean circuit depth (averaged across $\langle ZZ \rangle$, $\langle XX \rangle$, and $\langle YY \rangle$ circuits)  
-   - mean CX count  
-   - mean SWAP count  
+   - Bell fidelity $F$
+   - statistical error
+   - mean circuit depth (averaged across $\langle ZZ \rangle$, $\langle XX \rangle$, and $\langle YY \rangle$ circuits)
+   - mean CX count
+   - mean SWAP count
 
 The benchmark selects the best configuration per noise level and generates a comparative plot.
 
@@ -77,18 +77,11 @@ The benchmark selects the best configuration per noise level and generates a com
 
 This benchmark can be used to:
 
-- study compiler robustness under realistic noise  
-- compare transpiler optimization strategies  
-- analyze routing-induced fidelity degradation  
-- explore correlations between circuit complexity and entanglement loss  
-- serve as a lightweight experimental framework for NISQ benchmarking  
-
-It is relevant for:
-
-- quantum compiler research  
-- error mitigation studies  
-- hardware-aware circuit optimization  
-- advanced quantum computing coursework  
+- study compiler robustness under realistic noise
+- compare transpiler optimization strategies
+- analyze routing-induced fidelity degradation
+- explore correlations between circuit complexity and entanglement loss
+- serve as a lightweight experimental framework for NISQ benchmarking
 
 ---
 
@@ -101,79 +94,3 @@ python -m venv .venv
 source .venv/bin/activate        # macOS / Linux
 # or
 .venv\Scripts\activate           # Windows
-```
-
-Install dependencies:
-
-```bash
-pip install -r requirements.txt
-```
-
----
-
-## Running the Benchmark
-
-```bash
-python bell_fidelity_benchmark.py
-```
-
-The script will:
-
-- compile all circuit configurations  
-- perform a noise sweep  
-- save results to CSV  
-- generate a fidelity vs noise plot  
-- print the best observed configuration  
-
----
-
-## Output
-
-### bell_fidelity_results.csv
-
-Contains:
-
-- Bell state  
-- optimization level  
-- routing method  
-- noise parameters ($p_{1q}$, $p_{2q}$)  
-- $\langle ZZ \rangle$, $\langle XX \rangle$, $\langle YY \rangle$ correlators  
-- Bell fidelity $F$  
-- statistical error  
-- mean circuit depth  
-- mean CX count  
-- mean SWAP count  
-
-### bell_fidelity_vs_noise.png
-
-Plot of best Bell fidelity versus depolarizing noise level.
-
----
-
-## Google Colab Setup (if needed)
-
-If you encounter Qiskit version conflicts in Google Colab:
-
-```bash
-pip uninstall -y qiskit qiskit-terra qiskit-aer qiskit-ibm-runtime
-pip install -r requirements.txt
-```
-
----
-
-## Project Structure
-
-```
-compiler-robust-bell-benchmark/
-├── bell_fidelity_benchmark.py
-├── requirements.txt
-├── README.md
-├── LICENSE
-└── .gitignore
-```
-
----
-
-## License
-
-MIT License
