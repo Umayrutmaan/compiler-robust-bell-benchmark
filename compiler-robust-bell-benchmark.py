@@ -1,13 +1,3 @@
-"""
-bell_benchmark.py — Bell-state fidelity benchmark (Qiskit Aer).
-
-Provides:
-- prepare_bell_state: build one of four Bell states on 2 qubits
-- add_pauli_measurement: measure ZZ / XX / YY correlators via basis changes
-- make_noise_model: depolarizing + thermal relaxation (+ optional readout error)
-- run_benchmark: sweep noise, run circuits, save CSV + plot
-"""
-
 import math
 from typing import Dict, Tuple, Optional, Iterable
 
